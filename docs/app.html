@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module app</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">app</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Crepositorios%5Cdalp_2526%5Cprueba%5Cecpy_proyecto_bikeparking_g2%5Csrc%5Capp.py">c:\repositorios\dalp_2526\prueba\ecpy_proyecto_bikeparking_g2\src\app.py</a></td></tr></table>
+    <p><span class="code">app.py&nbsp;—&nbsp;Aplicación&nbsp;básica&nbsp;del&nbsp;Sistema&nbsp;de&nbsp;Parking&nbsp;de&nbsp;Bicis<br>
+&nbsp;<br>
+Este&nbsp;archivo&nbsp;contiene:<br>
+-&nbsp;El&nbsp;menú&nbsp;principal.<br>
+-&nbsp;Las&nbsp;funciones&nbsp;de&nbsp;cada&nbsp;opción&nbsp;(alta&nbsp;usuario,&nbsp;alta&nbsp;bici,&nbsp;IN/OUT,&nbsp;etc.).<br>
+-&nbsp;Funciones&nbsp;de&nbsp;interfaz&nbsp;(mostrar&nbsp;menús,&nbsp;pedir&nbsp;datos,&nbsp;mensajes).<br>
+-&nbsp;El&nbsp;bucle&nbsp;principal&nbsp;(main).</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="csv.html">csv</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-añadir_bici"><strong>añadir_bici</strong></a>()</dt><dd><span class="code">Esta&nbsp;parte&nbsp;del&nbsp;codigo&nbsp;se&nbsp;encarga&nbsp;de&nbsp;añadir&nbsp;las&nbsp;bicis&nbsp;del&nbsp;usuario<br>
+que&nbsp;no&nbsp;esten&nbsp;ya&nbsp;previamente&nbsp;registradas</span></dd></dl>
+ <dl><dt><a name="-añadir_usuario"><strong>añadir_usuario</strong></a>()</dt><dd><span class="code">Esta&nbsp;dfunción&nbsp;se&nbsp;encarga&nbsp;de&nbsp;añadir&nbsp;los&nbsp;nuevos&nbsp;usuarios&nbsp;que&nbsp;se&nbsp;<br>
+quieran&nbsp;meter&nbsp;en&nbsp;el&nbsp;parking&nbsp;de&nbsp;bicis</span></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt><dd><span class="code">Función&nbsp;principal&nbsp;que&nbsp;arranca&nbsp;el&nbsp;programa</span></dd></dl>
+ <dl><dt><a name="-menu_gestion_usuarios_bicis"><strong>menu_gestion_usuarios_bicis</strong></a>()</dt><dd><span class="code">Muestra&nbsp;el&nbsp;menu&nbsp;de&nbsp;gestion&nbsp;de&nbsp;usuarios&nbsp;y&nbsp;bicis</span></dd></dl>
+ <dl><dt><a name="-mostrar_menu"><strong>mostrar_menu</strong></a>(pRunning)</dt><dd><span class="code">Muestra&nbsp;el&nbsp;menu&nbsp;principal&nbsp;y&nbsp;llama&nbsp;a&nbsp;las&nbsp;funciones&nbsp;correspondientes</span></dd></dl>
+ <dl><dt><a name="-mostrar_menu_principal"><strong>mostrar_menu_principal</strong></a>()</dt><dd><span class="code">Muestra&nbsp;el&nbsp;menu&nbsp;principal</span></dd></dl>
+ <dl><dt><a name="-mostrar_titulo"><strong>mostrar_titulo</strong></a>()</dt><dd><span class="code">Muestra&nbsp;el&nbsp;titulo&nbsp;cuando&nbsp;un&nbsp;usuario&nbsp;llega&nbsp;a&nbsp;la&nbsp;pantalla</span></dd></dl>
+ <dl><dt><a name="-pausar"><strong>pausar</strong></a>()</dt><dd><span class="code">Espera&nbsp;a&nbsp;que&nbsp;el&nbsp;usuario&nbsp;pulse&nbsp;enter&nbsp;para&nbsp;pasar&nbsp;al&nbsp;siguiente&nbsp;paso</span></dd></dl>
+ <dl><dt><a name="-pedir_dato"><strong>pedir_dato</strong></a>(prompt)</dt><dd><span class="code">Pide&nbsp;los&nbsp;datos</span></dd></dl>
+ <dl><dt><a name="-print_error"><strong>print_error</strong></a>(mensaje)</dt><dd><span class="code">Le&nbsp;pone&nbsp;por&nbsp;pantalla&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;error&nbsp;al&nbsp;usuario<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mensaje&nbsp;(str):&nbsp;Es&nbsp;el&nbsp;mensaje&nbsp;que&nbsp;se&nbsp;le&nbsp;pone&nbsp;al&nbsp;usuario</span></dd></dl>
+ <dl><dt><a name="-print_ok"><strong>print_ok</strong></a>(mensaje)</dt><dd><span class="code">Manda&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;ok&nbsp;al&nbsp;usuario<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mensaje&nbsp;(str):&nbsp;Es&nbsp;el&nbsp;mensaje&nbsp;que&nbsp;se&nbsp;le&nbsp;pone&nbsp;al&nbsp;usuario</span></dd></dl>
+ <dl><dt><a name="-registrar_entrada"><strong>registrar_entrada</strong></a>()</dt><dd><span class="code">Comprueba&nbsp;si&nbsp;la&nbsp;bici&nbsp;esta&nbsp;de&nbsp;dentro&nbsp;del&nbsp;parking,&nbsp;si&nbsp;no&nbsp;es&nbsp;así&nbsp;la&nbsp;puedes&nbsp;meter.</span></dd></dl>
+ <dl><dt><a name="-registrar_salida"><strong>registrar_salida</strong></a>()</dt><dd><span class="code">Comprueba&nbsp;si&nbsp;la&nbsp;bici&nbsp;esta&nbsp;fuera&nbsp;del&nbsp;parking,&nbsp;si&nbsp;no&nbsp;es&nbsp;así&nbsp;la&nbsp;puedes&nbsp;sacar.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>PATH_BICIS</strong> = r'C:\Repositorios\DALP_2526\Prueba\ECPY_Proyecto_BikeParking_G2\src\data\bicis.csv'<br>
+<strong>PATH_REGISTROS</strong> = r'C:\Repositorios\DALP_2526\Prueba\ECPY_Proyecto_BikeParking_G2\src\data\registros.csv'<br>
+<strong>PATH_USUARIOS</strong> = r'C:\Repositorios\DALP_2526\Prueba\ECPY_Proyecto_BikeParking_G2\src\data\usuarios.csv'<br>
+<strong>directorio</strong> = r'C:\Repositorios\DALP_2526\Prueba\ECPY_Proyecto_BikeParking_G2\src\data'</td></tr></table>
+</body></html>

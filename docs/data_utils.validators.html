@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module data_utils.validators</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="data_utils.html" class="white">data_utils</a>.validators</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Crepositorios%5Cdalp_2526%5Cprueba%5Cecpy_proyecto_bikeparking_g2%5Csrc%5Cdata_utils%5Cvalidators.py">c:\repositorios\dalp_2526\prueba\ecpy_proyecto_bikeparking_g2\src\data_utils\validators.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-campo_no_vacio"><strong>campo_no_vacio</strong></a>(pcampo: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;el&nbsp;campo&nbsp;no&nbsp;esta&nbsp;vacio<br>
+&nbsp;<br>
+args:&nbsp;pcampo&nbsp;(str):&nbsp;campo&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-es_dni_unico"><strong>es_dni_unico</strong></a>(puni_dni: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;solo&nbsp;hay&nbsp;un&nbsp;dni<br>
+&nbsp;<br>
+args:&nbsp;puni_dni&nbsp;(str):&nbsp;dni&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-es_dni_valido"><strong>es_dni_valido</strong></a>(pdni: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;el&nbsp;dni&nbsp;es&nbsp;correcto<br>
+&nbsp;<br>
+args:&nbsp;pdni&nbsp;(str):&nbsp;dni&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-es_email_unico"><strong>es_email_unico</strong></a>(puni_email: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;solo&nbsp;hay&nbsp;un&nbsp;email<br>
+&nbsp;<br>
+args:&nbsp;puni_email&nbsp;(str):&nbsp;email&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-es_email_valido"><strong>es_email_valido</strong></a>(pemail: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;el&nbsp;email&nbsp;es&nbsp;correcto<br>
+&nbsp;<br>
+args:&nbsp;pemail&nbsp;(str):&nbsp;email&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-es_serie_unica"><strong>es_serie_unica</strong></a>(puni_serie: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;solo&nbsp;esta&nbsp;ese&nbsp;numero&nbsp;de&nbsp;serie<br>
+&nbsp;<br>
+args:&nbsp;puni_serie&nbsp;(str):&nbsp;numero&nbsp;de&nbsp;serie&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-existe_bici"><strong>existe_bici</strong></a>(pbici_ok: str, plista_bici: list)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;existe&nbsp;la&nbsp;bici<br>
+&nbsp;<br>
+args:&nbsp;pbici_ok&nbsp;(str):&nbsp;bici&nbsp;a&nbsp;comprobar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;plista_bici&nbsp;(list):&nbsp;lista&nbsp;de&nbsp;bicis&nbsp;validas<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-existe_usuario"><strong>existe_usuario</strong></a>(pusuario_ok: str, plista_usuario: list)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;existe&nbsp;el&nbsp;usuario<br>
+&nbsp;<br>
+args:&nbsp;pusuario_ok&nbsp;(str):&nbsp;usuario&nbsp;a&nbsp;comprobar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;plista_usuario&nbsp;(list):&nbsp;lista&nbsp;de&nbsp;usuarios&nbsp;validos<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-normalizar_email"><strong>normalizar_email</strong></a>(pmayus: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;que&nbsp;el&nbsp;email&nbsp;esta&nbsp;en&nbsp;minusculas&nbsp;o&nbsp;mayusculas<br>
+&nbsp;<br>
+args:&nbsp;pmayus&nbsp;(str):&nbsp;email&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-normalizar_texto"><strong>normalizar_texto</strong></a>(pespacio: str)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;si&nbsp;hay&nbsp;espacios&nbsp;en&nbsp;el&nbsp;texto<br>
+&nbsp;<br>
+args:&nbsp;pespacio&nbsp;(str):&nbsp;texto&nbsp;a&nbsp;comprobar<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-puede_entrar"><strong>puede_entrar</strong></a>(pentrada: str, plista_entrada: list)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;la&nbsp;entrada&nbsp;de&nbsp;la&nbsp;bici<br>
+&nbsp;<br>
+args:&nbsp;pentrada&nbsp;(str):&nbsp;entrada&nbsp;a&nbsp;comprobar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plista_entrada&nbsp;(list):&nbsp;lista&nbsp;de&nbsp;entradas&nbsp;validas<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-puede_salir"><strong>puede_salir</strong></a>(psalida: str, plista_salida: list)</dt><dd><span class="code">"<br>
+Función&nbsp;que&nbsp;comprueba&nbsp;la&nbsp;salida&nbsp;de&nbsp;la&nbsp;bici<br>
+&nbsp;<br>
+args:&nbsp;psalida&nbsp;(str):&nbsp;salida&nbsp;a&nbsp;comprobar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plista_salida&nbsp;(list):&nbsp;lista&nbsp;de&nbsp;salidas&nbsp;validas<br>
+&nbsp;<br>
+returns:&nbsp;bool</span></dd></dl>
+ <dl><dt><a name="-validar_dni"><strong>validar_dni</strong></a>(dni)</dt><dd><span class="code">Función&nbsp;que&nbsp;valida&nbsp;un&nbsp;DNI&nbsp;español.<br>
+args:&nbsp;dni&nbsp;(str):&nbsp;DNI&nbsp;a&nbsp;validar<br>
+returns:&nbsp;bool</span></dd></dl>
+</td></tr></table>
+</body></html>

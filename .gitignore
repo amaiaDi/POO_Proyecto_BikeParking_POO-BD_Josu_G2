@@ -1,0 +1,11 @@
+# Entorno virtual
+venvBikeParking/
+# Archivos temporales y cachés
+__pycache__/
+*.pyc
+*.log
+# Configuración local de VS Code
+.vscode/
+# Variables de entorno
+.env
+

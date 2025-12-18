@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecpy_bikeparking"
+version = "0.1.0"
+description = "Proyecto BikeParking con estructura src/ + tests/"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+# Le decimos a Python que el código fuente está en la carpeta src
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Añade src al PYTHONPATH cuando se ejecutan los tests
+pythonpath = ["src"]
+# Carpeta donde están los tests
+testpaths = ["tests"]
+# Opcional: flags por defecto para pytest
+addopts = "-ra"
