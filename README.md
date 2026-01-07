@@ -29,4 +29,11 @@ Para poder hacer este programa hemos usado los siguientes ficheros csv:
     -scribir_csv_dic: Este archivo escribe diccionarios
     -asegurar_csvs: Asegura que los csv tengan cabecera.
 
+En la nueva version v3.0 hemos añadido los test automatizados,para ejecutarlos tienes que hacer lo siguiente:
+    - Abre una terminal en la raíz del proyecto.
+    - Activa el entorno virtual (si existe).
+    - Ejecuta el comando:
+        - pytest -v
+
+
     
