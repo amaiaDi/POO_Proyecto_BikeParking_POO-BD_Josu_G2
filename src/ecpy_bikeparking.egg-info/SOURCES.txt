@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/data_utils/__init__.py
+src/data_utils/csv_utils.py
+src/data_utils/validators.py
+src/ecpy_bikeparking.egg-info/PKG-INFO
+src/ecpy_bikeparking.egg-info/SOURCES.txt
+src/ecpy_bikeparking.egg-info/dependency_links.txt
+src/ecpy_bikeparking.egg-info/top_level.txt
+tests/test_csv_utils.py
+tests/test_validators_dni_email.py
+tests/test_validators_estado_campos_normalizacion.py
+tests/test_validators_unicidad_existencia.py

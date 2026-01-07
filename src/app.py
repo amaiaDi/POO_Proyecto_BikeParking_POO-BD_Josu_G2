@@ -30,7 +30,12 @@ from data_utils.validators import existe_usuario
 from data_utils.validators import * 
 from data_utils.csv_utils import *
 from config import *
+import sqlite3
+from data_utils.sqlite_utils import init_db
 
+
+conn = sqlite3.connect("data/bike_parking.db")
+conn.close()
 
 
 
@@ -441,5 +446,7 @@ def main():
 # ----------------------------------
 
 
+
 if __name__ == "__main__": 
+    init_db()
     main()
