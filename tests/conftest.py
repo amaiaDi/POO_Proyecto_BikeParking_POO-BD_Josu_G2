@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 #TODO Revisar los imports según la estructura del proyecto
-from src.data_utils.sqlite_utils import get_connection, init_db
+from data_utils.sqlite_utils import init_db
 
 
 @pytest.fixture()

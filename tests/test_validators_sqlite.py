@@ -2,18 +2,18 @@
 Docstring para tests.test_validators_sqlite
 '''
 #TODO Revisar los imports según la estructura del proyecto
-from src.data_utils.sqlite_utils import (
+from data_utils.sqlite_utils import (
     insert_usuario,
     insert_bici,
     insert_registro,
     get_ultimo_estado_bici,
 )
-from src.modelo.usuario import Usuario
-from src.modelo.bici import Bici
-from src.modelo.registro import Registro
+from modelo.usuario import Usuario
+from modelo.bici import Bici
+from modelo.registro import Registro
 
 # Ajusta este import al módulo real donde estén tus validadores
-from src.validators.validators_sqlite import (
+from test_validators_unicidad_existencia import (
     existe_usuario,
     existe_email,
     existe_bici,

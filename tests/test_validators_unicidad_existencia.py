@@ -28,6 +28,13 @@ def test_serie_unica_duplicada():
 
 
 # 5.4 Existencia
+
+def existe_bici(serie, bicis):
+    """
+    Función que comprueba si una serie de bici existe en la lista de bicis.
+    """
+    return any(b["serie_cuadro"] == serie for b in bicis)
+
 def test_existe_usuario_si():
     usuarios = [{"dni": "12345678A"}, {"dni": "87654321B"}]
     assert validators.existe_usuario("12345678A", usuarios) is True

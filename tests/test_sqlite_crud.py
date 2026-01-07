@@ -1,7 +1,7 @@
 import sqlite3
 
 #TODO Revisar los imports según la estructura del proyecto
-from src.data_utils.sqlite_utils import (
+from data_utils.sqlite_utils import (
     insert_usuario,
     insert_bici,
     insert_registro,
@@ -9,9 +9,9 @@ from src.data_utils.sqlite_utils import (
     fetch_bicis,
     fetch_registros_by_serie,
 )
-from src.modelo.usuario import Usuario
-from src.modelo.bici import Bici
-from src.modelo.registro import Registro
+from modelo.usuario import Usuario
+from modelo.bici import Bici
+from modelo.registro import Registro
 
 
 def test_crud_insert_y_fetch(conn):
