@@ -41,6 +41,7 @@ conn.close()
 
 
 
+
 # ----------------------------------
 # 2. CONSTANTES LOCALES (opcional)
 # AQUÍ PUEDEN DEFINIR:
