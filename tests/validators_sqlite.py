@@ -13,7 +13,7 @@ from modelo.bici import Bici
 from modelo.registro import Registro
 
 # Ajusta este import al módulo real donde estén tus validadores
-from test_validators_unicidad_existencia import (
+from no_validos.test_validators_unicidad_existencia import (
     existe_usuario,
     existe_email,
     existe_bici,

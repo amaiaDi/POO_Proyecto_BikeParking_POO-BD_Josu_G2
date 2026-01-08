@@ -2,7 +2,7 @@
 class Bici:
     def to_dict(self) -> dict:
         """
-        Convierte el objeto Usuario en un diccionario.
+        Convierte el objeto Bici en un diccionario.
         Útil para tests, comparaciones y depuración.
         """
         return {

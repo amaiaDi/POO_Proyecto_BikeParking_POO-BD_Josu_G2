@@ -1,3 +1,6 @@
+
+import re
+
 def es_dni_valido(pdni: str):
     """"
     Función que comprueba que el dni es correcto
@@ -35,8 +38,8 @@ def puede_entrar(pentrada: str, plista_entrada: list):
 
     if plista_entrada != None and len(plista_entrada) >0:
             for registro in reversed(plista_entrada):
-                if registro["serie_cuadro"] == (pentrada):
-                    if registro["accion"] == ("IN"):
+                if registro.serie_cuadro == (pentrada):
+                    if registro.accion == ("IN"):
                         puede_entrar = False
                     else: 
                         puede_entrar = True
@@ -55,8 +58,8 @@ def puede_salir(psalida: str, plista_salida: list):
     puede_salir = False
     if plista_salida != None and len(plista_salida) >0:
             for registro in reversed(plista_salida):
-                if registro["serie_cuadro"] == (psalida):
-                    if registro["accion"] == ("OUT"):
+                if registro.serie_cuadro == (psalida):
+                    if registro.accion == ("OUT"):
                         puede_salir = False
                     else: 
                         puede_salir = True
@@ -105,7 +108,6 @@ def normalizar_texto(pespacio: str):
 
 
 
-import re
 
 def normalizar_email(valor) -> bool:
     """
@@ -148,7 +150,7 @@ def es_dni_unico(puni_dni: str, plista_usuario: list):
     returns: bool
     """
     for usuarios in(plista_usuario):
-        if usuarios["dni"] == (puni_dni):
+        if usuarios.dni == (puni_dni):
             es_dni_unico = False
         else: 
             es_dni_unico = True
@@ -165,7 +167,7 @@ def es_serie_unica(puni_serie: str, plista_bici: list):
     returns: bool
     """
     for serie in(plista_bici):
-        if serie["serie_cuadro"] == (puni_serie):
+        if serie.serie_cuadro == (puni_serie):
             es_serie_unica = False
         else: 
             es_serie_unica = True
@@ -182,7 +184,7 @@ def existe_usuario(pusuario_ok: str, plista_usuario: list):
     returns: bool
     """
     for ex_usuario in(plista_usuario):
-        if ex_usuario["dni"] == (pusuario_ok):
+        if ex_usuario.dni == (pusuario_ok):
             existe_usuario = False
         else: 
             existe_usuario = True
@@ -199,7 +201,7 @@ def existe_bici(pbici_ok: str, plista_bici: list):
     returns: bool
     """
     for biciok in (plista_bici):
-        if biciok["serie_cuadro"] == (pbici_ok):
+        if biciok.serie_cuadro == (pbici_ok):
              existe_bici = True
         else: 
             existe_bici = False

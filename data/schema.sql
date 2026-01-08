@@ -1,3 +1,13 @@
+"""Base de datos para la gestión de usuarios, bicicletas y registros de acceso.
+
+- usuarios: almacena los datos de los usuarios (DNI, nombre y email).
+- bicis: registra las bicicletas asociadas a cada usuario.
+- registros: guarda los movimientos de entrada (IN) y salida (OUT) de bicicletas.
+
+Se aplican claves foráneas con integridad referencial, restricciones de
+valores y índices para optimizar las consultas más frecuentes.
+"""
+
 PRAGMA foreign_keys = ON;
 
 DROP TABLE IF EXISTS registros;
