@@ -1,5 +1,10 @@
 
 class Usuario:
+    def __init__(self,dni,nombre,email):
+        self.dni = dni
+        self.nombre = nombre
+        self.email = email
+        
     def to_dict(self) -> dict:
         """
         Convierte el objeto Usuario en un diccionario.

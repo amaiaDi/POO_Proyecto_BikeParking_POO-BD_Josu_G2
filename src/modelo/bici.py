@@ -1,5 +1,11 @@
 
 class Bici:
+    def __init__(self,modelo,marca, serie_cuadro, dni_usuario):
+        self.modelo = modelo
+        self.marca = marca
+        self.serie_cuadro = serie_cuadro
+        self.dni_usuario = dni_usuario
+        
     def to_dict(self) -> dict:
         """
         Convierte el objeto Bici en un diccionario.

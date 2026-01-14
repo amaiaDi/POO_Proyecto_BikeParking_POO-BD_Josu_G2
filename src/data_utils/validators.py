@@ -135,9 +135,9 @@ def es_email_unico(p_uniemail: str, plista_usuarios: set | list) -> bool:
 
     email_normalizado = p_uniemail.strip().lower()
     emails_existentes = {
-        u.get("email", "").strip().lower()
+        u.email.strip().lower()
         for u in plista_usuarios
-        if "email" in u and u["email"]
+        if hasattr(u, "email") and u.email
     }
     return email_normalizado not in emails_existentes
 
@@ -149,12 +149,12 @@ def es_dni_unico(puni_dni: str, plista_usuario: list):
         plista_usuario (list): lista de usuarios validos
     returns: bool
     """
+    es_dni_unico=True
     for usuarios in(plista_usuario):
         if usuarios.dni == (puni_dni):
             es_dni_unico = False
-        else: 
-            es_dni_unico = True
-        break
+            break
+        
     return es_dni_unico
 
 
@@ -166,13 +166,10 @@ def es_serie_unica(puni_serie: str, plista_bici: list):
         plista_bicis (list): lista de bicis validas
     returns: bool
     """
-    for serie in(plista_bici):
-        if serie.serie_cuadro == (puni_serie):
-            es_serie_unica = False
-        else: 
-            es_serie_unica = True
-        break
-    return es_serie_unica
+    for bici in plista_bici:
+        if bici.serie_cuadro == puni_serie:
+            return False  
+    return True
 
 def existe_usuario(pusuario_ok: str, plista_usuario: list):
     """"
