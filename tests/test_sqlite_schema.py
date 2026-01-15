@@ -1,3 +1,4 @@
+
 def test_schema_crea_tablas(conn):
     """
     Verifica que, tras ejecutar init_db(conn), existen las tablas principales

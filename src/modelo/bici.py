@@ -1,6 +1,6 @@
 
 class Bici:
-    def __init__(self,modelo,marca, serie_cuadro, dni_usuario):
+    def __init__(self,serie_cuadro,dni_usuario,marca,modelo):
         self.modelo = modelo
         self.marca = marca
         self.serie_cuadro = serie_cuadro

@@ -11,7 +11,7 @@ def es_dni_valido(pdni: str):
     """
     return validar_dni(pdni)
 
-def es_email_valido(pemail: str):
+def es_email_valido(pemail: str) -> bool:
     
     """"
     Función que comprueba que el email es correcto
@@ -21,10 +21,26 @@ def es_email_valido(pemail: str):
     returns: bool
     """
 
-    if "@" in pemail and "." in pemail:
-        return True
-    else:
+    if not isinstance(pemail, str):
         return False
+
+    if pemail.count("@") != 1:
+        return False
+
+    parte_local, dominio = pemail.split("@")
+
+    if not parte_local:
+        return False
+
+    if "." not in dominio:
+        return False
+
+    nombre_dominio, extension = dominio.rsplit(".", 1)
+
+    if not nombre_dominio or not extension:
+        return False
+
+    return True
 
 def puede_entrar(pentrada: str, plista_entrada: list):
     """"
@@ -35,16 +51,16 @@ def puede_entrar(pentrada: str, plista_entrada: list):
 
     returns: bool
     """
+def puede_entrar(pentrada: str, plista_entrada: list):
+    if not plista_entrada:
+        return True
 
-    if plista_entrada != None and len(plista_entrada) >0:
-            for registro in reversed(plista_entrada):
-                if registro.serie_cuadro == (pentrada):
-                    if registro.accion == ("IN"):
-                        puede_entrar = False
-                    else: 
-                        puede_entrar = True
-                    break
-    return puede_entrar
+    for registro in reversed(plista_entrada):
+        if registro.serie_cuadro == pentrada:
+            return registro.accion != "IN"
+
+    return True
+
 
 def puede_salir(psalida: str, plista_salida: list):
     """"
@@ -150,15 +166,15 @@ def es_dni_unico(puni_dni: str, plista_usuario: list):
     returns: bool
     """
     es_dni_unico=True
-    for usuarios in(plista_usuario):
-        if usuarios.dni == (puni_dni):
+    for usuarios in plista_usuario:
+        if usuarios.dni == puni_dni:
             es_dni_unico = False
             break
         
     return es_dni_unico
 
 
-def es_serie_unica(puni_serie: str, plista_bici: list):
+def es_serie_unica(puni_serie_cuadro: str, plista_bici: list):
     """"
     Función que comprueba si solo esta ese numero de serie
 
@@ -167,7 +183,7 @@ def es_serie_unica(puni_serie: str, plista_bici: list):
     returns: bool
     """
     for bici in plista_bici:
-        if bici.serie_cuadro == puni_serie:
+        if bici.serie_cuadro == puni_serie_cuadro:
             return False  
     return True
 
@@ -180,13 +196,12 @@ def existe_usuario(pusuario_ok: str, plista_usuario: list):
 
     returns: bool
     """
-    for ex_usuario in(plista_usuario):
-        if ex_usuario.dni == (pusuario_ok):
-            existe_usuario = False
-        else: 
-            existe_usuario = True
-        break
-    return existe_usuario
+    for usuario in plista_usuario:
+        if usuario.dni == pusuario_ok:
+            return True
+    return False
+            
+
 
 def existe_bici(pbici_ok: str, plista_bici: list):
     """"
@@ -197,13 +212,11 @@ def existe_bici(pbici_ok: str, plista_bici: list):
 
     returns: bool
     """
-    for biciok in (plista_bici):
-        if biciok.serie_cuadro == (pbici_ok):
-             existe_bici = True
-        else: 
-            existe_bici = False
-        break
-    return existe_bici
+    for biciok in plista_bici:
+        if biciok.serie_cuadro == pbici_ok:
+            return True
+    return False
+
 
 def validar_dni(dni):
     """

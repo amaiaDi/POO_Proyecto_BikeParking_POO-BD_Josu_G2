@@ -7,6 +7,9 @@ from pathlib import Path
 
 import pytest
 
+import sqlite3
+from src.data_utils.sqlite_utils import get_connection
+
 #TODO Revisar los imports según la estructura del proyecto
 from data_utils.sqlite_utils import init_db
 
