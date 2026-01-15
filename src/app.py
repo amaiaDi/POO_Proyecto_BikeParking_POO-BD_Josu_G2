@@ -32,6 +32,7 @@ from data_utils.csv_utils import *
 from config import *
 import sqlite3
 from data_utils.sqlite_utils import init_db
+from data_utils.sqlite_utils import get_connection
 
 
 conn = sqlite3.connect("data/bike_parking.db")
@@ -447,8 +448,11 @@ def main():
 # ----------------------------------
 
 
-
-if __name__ == "__main__":
+if __name__ == "__main__": 
     init_db()
-    main()
+    conn = get_connection(DB_PATH)
+    try:
+        main()
+    finally:
+        conn.close()
     

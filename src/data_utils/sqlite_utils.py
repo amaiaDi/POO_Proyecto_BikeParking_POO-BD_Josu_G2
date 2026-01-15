@@ -18,17 +18,31 @@ def get_connection(db_path: str) -> sqlite3.Connection:
     return conn
 
 
-def init_db(conn: sqlite3.Connection) -> None:
+
+def init_db(conn: sqlite3.Connection | None = None, *, schema_path: str = "data/schema.sql", db_path: str = "data/bike_parking.db") -> sqlite3.Connection:
     """
-    Crea las tablas ejecutando el fichero schema.sql.
+    Inicializa la base de datos ejecutando el schema SQL proporcionado.
+
+    Si no se pasa una conexión, crea una nueva apuntando a db_path. Devuelve la
+    conexión utilizada para permitir reutilizarla en tests u otros flujos.
     """
+    own_conn = False
+    if conn is None:
+        conn = get_connection(db_path)
+        own_conn = True
+
     cursor = conn.cursor()
 
-    with open("data/schema.sql", "r", encoding="utf-8") as f:
+    with open(schema_path, "r", encoding="utf-8") as f:
         sql = f.read()
 
     cursor.executescript(sql)
     conn.commit()
+
+    if own_conn:
+        conn.close()
+
+    return conn
 
 
 def existe_dni(conn: sqlite3.Connection, dni: str) -> bool:
@@ -192,5 +206,6 @@ def get_ultimo_estado_bici(
         return None
 
     return row["accion"]
+
 
 
