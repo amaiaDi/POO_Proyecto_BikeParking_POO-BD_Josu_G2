@@ -1,9 +1,9 @@
 
 class Bici:
-    def __init__(self,serie_cuadro,dni_usuario,marca,modelo):
+    def __init__(self,numero_serie,dni_usuario,marca,modelo):
         self.modelo = modelo
         self.marca = marca
-        self.serie_cuadro = serie_cuadro
+        self.numero_serie = numero_serie
         self.dni_usuario = dni_usuario
         
     def to_dict(self) -> dict:
@@ -14,6 +14,6 @@ class Bici:
         return {
             "modelo": self.modelo,
             "marca": self.marca,
-            "serie_cuadro": self.serie_cuadro,
+            "serie_cuadro": self.numero_serie,
             "dni_usuario": self.dni_usuario
             }

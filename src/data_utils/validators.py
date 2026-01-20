@@ -157,21 +157,26 @@ def es_email_unico(p_uniemail: str, plista_usuarios: set | list) -> bool:
     }
     return email_normalizado not in emails_existentes
 
-def es_dni_unico(puni_dni: str, plista_usuario: list):
-    """"
+def es_dni_unico(dni, lista_usuarios):    #puni_dni: str, plista_usuario: list
+    """
     Función que comprueba si solo hay un dni
 
     args: puni_dni (str): dni a comprobar
         plista_usuario (list): lista de usuarios validos
     returns: bool
     """
-    es_dni_unico=True
-    for usuarios in plista_usuario:
-        if usuarios.dni == puni_dni:
-            es_dni_unico = False
-            break
+    #es_dni_unico=True
+    #for usuarios in plista_usuario:
+        #if usuarios.dni == puni_dni:
+            #es_dni_unico = False
+            #break
         
-    return es_dni_unico
+    #return es_dni_unico
+
+    for usuario in lista_usuarios:
+        if usuario.dni == dni:
+            return False
+    return True
 
 
 def es_serie_unica(puni_serie_cuadro: str, plista_bici: list):

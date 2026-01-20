@@ -22,27 +22,11 @@ Este archivo contiene:
 # SOLO INDICAR LOS IMPORTS NECESARIOS.
 # ----------------------------------
 from datetime import datetime
-from data_utils.csv_utils import leer_csv_dic
-from data_utils.csv_utils import escribir_csv_dic
-from data_utils.validators import existe_bici
-from data_utils.validators import existe_usuario
-
-from data_utils.validators import * 
+from data_utils.validators import *
 from data_utils.csv_utils import *
 from config import *
 import sqlite3
-from data_utils.sqlite_utils import init_db
-from data_utils.sqlite_utils import get_connection
-
-
-conn = sqlite3.connect("data/bike_parking.db")
-conn.close()
-
-
-
-
-
-
+from data_utils.sqlite_utils import *
 # ----------------------------------
 # 2. CONSTANTES LOCALES (opcional)
 # AQUÍ PUEDEN DEFINIR:
@@ -56,13 +40,6 @@ conn.close()
 #
 # Pero SIN poner código aún.
 # ----------------------------------
-
-
-
-
-
-
-
 
 # ----------------------------------
 # 3. FUNCIONES DE INTERFAZ (UI)
@@ -92,7 +69,6 @@ conn.close()
 # Todas estas funciones deben ser ESCRITAS POR LOS ALUMNOS.
 # SOLO DEJAR LOS COMENTARIOS.
 # ----------------------------------
-
 
 def mostrar_titulo():
     """Muestra el titulo cuando un usuario llega a la pantalla
@@ -138,8 +114,6 @@ def mostrar_menu_principal():
     print("3) Registrar SALIDA (OUT)")
     print("0) Salir")
 
-
-
 # ----------------------------------
 # 4. FUNCIONES DE CASO DE USO
 # AQUÍ DEBEN CREAR UNA FUNCIÓN POR CADA ACCIÓN DEL MENÚ:
@@ -175,8 +149,6 @@ def mostrar_menu_principal():
 # no código.
 # ----------------------------------
 
-
-
 def añadir_usuario():
     """Esta dfunción se encarga de añadir los nuevos usuarios que se 
     quieran meter en el parking de bicis
@@ -196,7 +168,8 @@ def añadir_usuario():
          print("ERROR: Valor no correcto")
          email = input("Escribe tu email: ") 
 
-    lista_usuarios = leer_csv_dic(PATH_USUARIOS)
+    #lista_usuarios = leer_csv_dic(PATH_USUARIOS)
+    lista_usuarios = leer_usuarios(conn)
     
     if not es_dni_unico(dni, lista_usuarios):
          print("-ERROR: El DNI ya existe.")
@@ -205,16 +178,15 @@ def añadir_usuario():
          print("-ERROR: El email ya existe.")
 
     else: 
-         escribir_csv_dic(PATH_USUARIOS, [{"dni" : dni, "nombre": nombre, "email": email}], ["dni", "nombre", "email"])
-         print("OK: Usuario registrado correctamente.")
+        insert_usuario(conn, Usuario(dni, nombre, email))
+        print("OK: Usuario registrado correctamente.")
         
-
-
 
 def añadir_bici():
     """Esta parte del codigo se encarga de añadir las bicis del usuario
     que no esten ya previamente registradas
     """
+    
     numero_serie = input("Introduce nº de serie del cuadro:")
     while numero_serie == "":
         numero_serie = input("Introduce nº de serie del cuadro:")
@@ -223,16 +195,19 @@ def añadir_bici():
     while dni_usuario == "":
         dni_usuario = input("Introduce DNI del usuisario:")
 
-    marca_bici = input("Introduce marca de la bici:")
-    while marca_bici == "":
-        marca_bici = input("Introduce marca de la bici:")
+    marca = input("Introduce marca de la bici:")
+    while marca == "":
+        marca = input("Introduce marca de la bici:")
 
-    modelo_bici = input("Introduce modelo de la bici:")
-    while modelo_bici == "":
-        modelo_bici = input("Introduce modelo de la bici:")
+    modelo = input("Introduce modelo de la bici:")
+    while modelo == "":
+        modelo = input("Introduce modelo de la bici:")
 
-    lista_bicis = leer_csv_dic(PATH_BICIS)
-    lista_usuarios = leer_csv_dic(PATH_USUARIOS)
+    #lista_bicis = leer_csv_dic(PATH_BICIS)
+    #lista_usuarios = leer_csv_dic(PATH_USUARIOS)
+
+    lista_bicis = leer_bicis(conn)
+    lista_usuarios = leer_usuarios(conn)
 
     if existe_bici(numero_serie, lista_bicis): 
         print("Esta bici ya esta registrada")
@@ -241,13 +216,12 @@ def añadir_bici():
         print("Este usuario no existe.")
 
     else:
-        escribir_csv_dic(PATH_BICIS, [{"serie_cuadro" : numero_serie, "dni_usuario": dni_usuario, "marca": marca_bici, "modelo": modelo_bici}], ["serie_cuadro", "dni_usuario", "marca", "modelo"])
-        print( "Todo OK: Bici añadida")
-
-
+        insert_bici(conn, Bici(numero_serie, dni_usuario, marca, modelo))
+        print("Bici añadida correctamente")
 
 
 def registrar_entrada():
+
 
     """ Comprueba si la bici esta de dentro del parking, si no es así la puedes meter.
     """
@@ -277,10 +251,12 @@ def registrar_entrada():
 
         # Validación de la situacion de la bici en el registro y registro de la misma
         if puede_entrar(numero_serie, lista_registro) == False:
-           
+         timestamp = timestamp
+         accion = accion
          reg_tiempo = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-         escribir_csv_dic(PATH_REGISTROS, [{"timestamp" : reg_tiempo, "accion": "IN", "serie_cuadro": numero_serie, "dni_usuario": dni_usuario}], ["timestamp", "accion", "serie_cuadro", "dni_usuario"])
+         insert_registro(conn, Registro(timestamp,accion, numero_serie, dni_usuario ))
          print("OK: Entrada registrada.") 
+
         else:
             print("La bici está dentro")
 
@@ -324,8 +300,6 @@ def registrar_salida():
         else:
             print("La bici no está dentro")
      
-        
-
 # ----------------------------------
 # 5. SUBMENÚ DE GESTIÓN
 # gestionar_usuarios_y_bicis():
@@ -338,6 +312,7 @@ def registrar_salida():
 #       eliminar_bici()
 #   - Volver al menú principal cuando el usuario elija "0".
 # ----------------------------------
+
 def menu_gestion_usuarios_bicis():
     """Muestra el menu de gestion de usuarios y bicis
     """
@@ -365,8 +340,8 @@ def menu_gestion_usuarios_bicis():
             elif opcion == "2":
                 print("--- ELIMINAR USUARIO ---")
                 print("----------------------")
-                print("Aun no existe la funcion")
-
+                delete_bici()
+               
             elif opcion == "3":
                 print("--- AÑADIR BICI ---")
                 print("----------------------")
@@ -375,7 +350,7 @@ def menu_gestion_usuarios_bicis():
             elif opcion == "4":
                 print("--- ELIMINAR BICI ---")
                 print("----------------------")
-                print("Aun no existe la funcion")
+                delete_bici()
         
             elif opcion == "0":
                 seguir = False
@@ -449,7 +424,7 @@ def main():
 
 
 if __name__ == "__main__": 
-    init_db()
+    #init_db()
     conn = get_connection(DB_PATH)
     try:
         main()

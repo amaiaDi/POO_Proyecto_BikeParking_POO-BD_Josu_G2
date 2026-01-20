@@ -81,7 +81,7 @@ def existe_bici(conn: sqlite3.Connection, serie: str) -> bool:
     return cursor.fetchone() is not None
 
 
-def insert_usuario(conn: sqlite3.Connection, usuario: Usuario) -> None:
+def insert_usuario(conn, usuario: Usuario) -> None:
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -93,7 +93,7 @@ def insert_usuario(conn: sqlite3.Connection, usuario: Usuario) -> None:
     conn.commit()
 
 
-def delete_usuario(conn: sqlite3.Connection, dni: str) -> None:
+def delete_usuario(conn, dni: str) -> None:
     cursor = conn.cursor()
     cursor.execute(
         "DELETE FROM usuarios WHERE dni = ?",
@@ -102,19 +102,21 @@ def delete_usuario(conn: sqlite3.Connection, dni: str) -> None:
     conn.commit()
 
 
-def insert_bici(conn: sqlite3.Connection, bici: Bici) -> None:
+
+def insert_bici(conn, bici: Bici) -> None:
     cursor = conn.cursor()
     cursor.execute(
         """
         INSERT INTO bicis (serie_cuadro, dni_usuario, marca, modelo)
         VALUES (?, ?, ?, ?)
         """,
-        (bici.serie_cuadro, bici.dni_usuario, bici.marca, bici.modelo)
+        (bici.numero_serie, bici.dni_usuario, bici.marca, bici.modelo)
     )
     conn.commit()
 
 
-def delete_bici(conn: sqlite3.Connection, serie: str) -> None:
+
+def delete_bici(conn, serie: str) -> None:
     cursor = conn.cursor()
     cursor.execute(
         "DELETE FROM bicis WHERE serie_cuadro = ?",
@@ -123,17 +125,18 @@ def delete_bici(conn: sqlite3.Connection, serie: str) -> None:
     conn.commit()
 
 
+
 def insert_registro(conn: sqlite3.Connection, registro: Registro) -> None:
     cursor = conn.cursor()
     cursor.execute(
         """
-        INSERT INTO registros (timestamp, accion, serie_cuadro, dni_usuario)
+        INSERT INTO registros (timestamp, accion, numero_serie, dni_usuario)
         VALUES (?, ?, ?, ?)
         """,
         (
             registro.timestamp,
             registro.accion,
-            registro.serie_cuadro,
+            registro.numero_serie,
             registro.dni_usuario
         )
     )
@@ -147,7 +150,7 @@ def leer_usuarios(conn: sqlite3.Connection) -> list[Usuario]:
         "SELECT dni, nombre, email FROM usuarios"
     )
     rows = cursor.fetchall()
-    return [Usuario.from_row(row) for row in rows]
+    return [Usuario(row[0], row[1], row[2]) for row in rows]
 
 
 def leer_bicis(conn: sqlite3.Connection) -> list[Bici]:
@@ -156,7 +159,7 @@ def leer_bicis(conn: sqlite3.Connection) -> list[Bici]:
         "SELECT serie_cuadro, dni_usuario, marca, modelo FROM bicis"
     )
     rows = cursor.fetchall()
-    return [Bici.from_row(row) for row in rows]
+    return [Bici.from_row(row[0], row[1], row[2], row[3]) for row in rows]
 
 
 def leer_registros_by_serie(
@@ -174,7 +177,7 @@ def leer_registros_by_serie(
         (serie,)
     )
     rows = cursor.fetchall()
-    return [Registro.from_row(row) for row in rows]
+    return [Registro.from_row(row[0], row[1], row[2], row[3], row[4]) for row in rows]
 
 
 
