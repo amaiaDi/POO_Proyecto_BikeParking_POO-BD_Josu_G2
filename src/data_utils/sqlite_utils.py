@@ -1,7 +1,5 @@
 from __future__ import annotations
-
 import sqlite3
-
 from modelo.usuario import Usuario
 from modelo.bici import Bici
 from modelo.registro import Registro
@@ -81,16 +79,26 @@ def existe_bici(conn: sqlite3.Connection, serie: str) -> bool:
     return cursor.fetchone() is not None
 
 
-def insert_usuario(conn, usuario: Usuario) -> None:
+def insert_usuario(conn, usuario: Usuario) -> bool:
+    """
+    Inserta un usuario en la base de datos.
+    Retorna True si se insertó correctamente, False si hubo error (duplicado).
+    """
     cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT INTO usuarios (dni, nombre, email)
-        VALUES (?, ?, ?)
-        """,
-        (usuario.dni, usuario.nombre, usuario.email)
-    )
-    conn.commit()
+    try:
+        cursor.execute(
+            """
+            INSERT INTO usuarios (dni, nombre, email)
+            VALUES (?, ?, ?)
+            """,
+            (usuario.dni, usuario.nombre, usuario.email)
+        )
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError as e:
+        print(f" Error al insertar usuario en la BD: {e}")
+        return False
+
 
 
 def delete_usuario(conn, dni: str) -> None:
@@ -159,7 +167,7 @@ def leer_bicis(conn: sqlite3.Connection) -> list[Bici]:
         "SELECT serie_cuadro, dni_usuario, marca, modelo FROM bicis"
     )
     rows = cursor.fetchall()
-    return [Bici.from_row(row[0], row[1], row[2], row[3]) for row in rows]
+    return [Bici(row[0], row[1], row[2], row[3]) for row in rows]
 
 
 def leer_registros_by_serie(
@@ -209,6 +217,3 @@ def get_ultimo_estado_bici(
         return None
 
     return row["accion"]
-
-
-

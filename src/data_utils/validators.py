@@ -1,5 +1,6 @@
 
 import re
+import sqlite3
 
 def es_dni_valido(pdni: str):
     """"
@@ -192,7 +193,7 @@ def es_serie_unica(puni_serie_cuadro: str, plista_bici: list):
             return False  
     return True
 
-def existe_usuario(pusuario_ok: str, plista_usuario: list):
+def existe_usuario(pusuario_ok: str, conn: sqlite3.Connection):
     """"
     Función que comprueba si existe el usuario
 
@@ -201,14 +202,12 @@ def existe_usuario(pusuario_ok: str, plista_usuario: list):
 
     returns: bool
     """
-    for usuario in plista_usuario:
-        if usuario.dni == pusuario_ok:
-            return True
+    existe_usuario(conn,pusuario_ok )
     return False
             
 
 
-def existe_bici(pbici_ok: str, plista_bici: list):
+def existe_bici(pbici_ok: str, conn: sqlite3.Connection):
     """"
     Función que comprueba si existe la bici
     
@@ -217,11 +216,8 @@ def existe_bici(pbici_ok: str, plista_bici: list):
 
     returns: bool
     """
-    for biciok in plista_bici:
-        if biciok.serie_cuadro == pbici_ok:
-            return True
+    existe_bici(conn, pbici_ok)
     return False
-
 
 def validar_dni(dni):
     """

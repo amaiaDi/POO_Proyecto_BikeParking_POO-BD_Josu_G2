@@ -22,11 +22,15 @@ Este archivo contiene:
 # SOLO INDICAR LOS IMPORTS NECESARIOS.
 # ----------------------------------
 from datetime import datetime
-from data_utils.validators import *
+import data_utils.validators  as valid
 from data_utils.csv_utils import *
 from config import *
-import sqlite3
-from data_utils.sqlite_utils import *
+import sqlite3 
+import data_utils.sqlite_utils  as sql_ut
+from pathlib import Path
+from modelo.bici import Bici
+from modelo.usuario import Usuario
+from modelo.registro import Registro
 # ----------------------------------
 # 2. CONSTANTES LOCALES (opcional)
 # AQUÍ PUEDEN DEFINIR:
@@ -149,38 +153,41 @@ def mostrar_menu_principal():
 # no código.
 # ----------------------------------
 
+
 def añadir_usuario():
-    """Esta dfunción se encarga de añadir los nuevos usuarios que se 
-    quieran meter en el parking de bicis
-    """
-    dni = input("Escribe tu DNI:")
-    while dni =="":
+    dni = input("Escribe tu DNI: ").strip()
+    while dni == "":
         print("ERROR: Valor no correcto")
-        dni = input("Escribe tu DNI:")
-    
-    nombre = input("Escribe tu nombre completo: ")
-    while nombre  == "":
-         print("ERROR: Valor no correcto")
-         nombre = input("Escribe tu nombre completo: ")
-     
-    email = input("Escribe tu email: ")
+        dni = input("Escribe tu DNI: ").strip()
+
+    nombre = input("Escribe tu nombre completo: ").strip()
+    while nombre == "":
+        print("ERROR: Valor no correcto")
+        nombre = input("Escribe tu nombre completo: ").strip()
+
+    email = input("Escribe tu email: ").strip()
     while email == "":
-         print("ERROR: Valor no correcto")
-         email = input("Escribe tu email: ") 
+        print("ERROR: Valor no correcto")
+        email = input("Escribe tu email: ").strip()
 
-    #lista_usuarios = leer_csv_dic(PATH_USUARIOS)
-    lista_usuarios = leer_usuarios(conn)
+    lista_usuarios = sql_ut.leer_usuarios(conn)
     
-    if not es_dni_unico(dni, lista_usuarios):
-         print("-ERROR: El DNI ya existe.")
+    for usuario in lista_usuarios:
+        if usuario.dni == dni:
+            print("ERROR: El DNI ya existe")
+            return
 
-    elif not es_email_unico(email, lista_usuarios):
-         print("-ERROR: El email ya existe.")
+    for usuario in lista_usuarios:
+        if usuario.email == email:
+            print("ERROR: El email ya existe")
+            return
 
-    else: 
-        insert_usuario(conn, Usuario(dni, nombre, email))
-        print("OK: Usuario registrado correctamente.")
-        
+    nuevo_usuario = Usuario(dni, nombre, email)
+    sql_ut.insert_usuario(conn, nuevo_usuario)
+
+    print("OK: Usuario registrado correctamente.")
+
+
 
 def añadir_bici():
     """Esta parte del codigo se encarga de añadir las bicis del usuario
@@ -191,9 +198,9 @@ def añadir_bici():
     while numero_serie == "":
         numero_serie = input("Introduce nº de serie del cuadro:")
        
-    dni_usuario = input("Introduce DNI del usuisario:")
+    dni_usuario = input("Introduce DNI del usuario:")
     while dni_usuario == "":
-        dni_usuario = input("Introduce DNI del usuisario:")
+        dni_usuario = input("Introduce DNI del usuario:")
 
     marca = input("Introduce marca de la bici:")
     while marca == "":
@@ -203,21 +210,17 @@ def añadir_bici():
     while modelo == "":
         modelo = input("Introduce modelo de la bici:")
 
-    #lista_bicis = leer_csv_dic(PATH_BICIS)
-    #lista_usuarios = leer_csv_dic(PATH_USUARIOS)
+    lista_bicis = sql_ut.leer_bicis(conn)
 
-    lista_bicis = leer_bicis(conn)
-    lista_usuarios = leer_usuarios(conn)
+    for bici in lista_bicis:
+        if bici.numero_serie == numero_serie:
+            print("ERROR: Esta bici ya existe")
+            return
+        
+    nueva_bici = Bici(numero_serie, dni_usuario, marca, modelo)
+    sql_ut.insert_bici(conn, nueva_bici)
 
-    if existe_bici(numero_serie, lista_bicis): 
-        print("Esta bici ya esta registrada")
-  
-    elif not existe_usuario(dni_usuario, lista_usuarios):
-        print("Este usuario no existe.")
-
-    else:
-        insert_bici(conn, Bici(numero_serie, dni_usuario, marca, modelo))
-        print("Bici añadida correctamente")
+    print("OK: Bici registrada correctamente")
 
 
 def registrar_entrada():
@@ -232,7 +235,7 @@ def registrar_entrada():
     while numero_serie == "":
         numero_serie = input("Introduce nº de serie del cuadro:")
        
-    if not existe_bici(numero_serie, lista_bicis): 
+    if not valid.existe_bici(numero_serie, lista_bicis): 
     
         print("Esta bici no existe")
         return
@@ -250,11 +253,11 @@ def registrar_entrada():
                     return
 
         # Validación de la situacion de la bici en el registro y registro de la misma
-        if puede_entrar(numero_serie, lista_registro) == False:
+        if valid.puede_entrar(numero_serie, lista_registro) == False:
          timestamp = timestamp
          accion = accion
          reg_tiempo = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-         insert_registro(conn, Registro(timestamp,accion, numero_serie, dni_usuario ))
+         sql_ut.insert_registro(conn, Registro(timestamp,accion, numero_serie, dni_usuario ))
          print("OK: Entrada registrada.") 
 
         else:
@@ -272,7 +275,7 @@ def registrar_salida():
     while numero_serie == "":
         numero_serie = input("Introduce nº de serie del cuadro:")
        
-    if not existe_bici(numero_serie, lista_bicis): 
+    if not valid.existe_bici(numero_serie, lista_bicis): 
     
         print("Esta bici no existe")
         return
@@ -290,7 +293,7 @@ def registrar_salida():
                     return
 
         # Validación de la situacion de la bici en el registro y registro de la misma
-        if puede_salir(numero_serie, lista_registro) == False:
+        if valid.puede_salir(numero_serie, lista_registro) == False:
            
          reg_tiempo = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
          escribir_csv_dic(PATH_REGISTROS, [{"timestamp" : reg_tiempo, "accion": "OUT", "serie_cuadro": numero_serie, "dni_usuario": dni_usuario}], ["timestamp", "accion", "serie_cuadro", "dni_usuario"])
@@ -340,7 +343,7 @@ def menu_gestion_usuarios_bicis():
             elif opcion == "2":
                 print("--- ELIMINAR USUARIO ---")
                 print("----------------------")
-                delete_bici()
+                sql_ut.delete_usuario()
                
             elif opcion == "3":
                 print("--- AÑADIR BICI ---")
@@ -350,7 +353,7 @@ def menu_gestion_usuarios_bicis():
             elif opcion == "4":
                 print("--- ELIMINAR BICI ---")
                 print("----------------------")
-                delete_bici()
+                sql_ut.delete_bici()
         
             elif opcion == "0":
                 seguir = False
@@ -374,7 +377,8 @@ def menu_gestion_usuarios_bicis():
 def mostrar_menu(pRunning):
     """Muestra el menu principal y llama a las funciones correspondientes
     """
-    
+    global running
+
     while pRunning:
         mostrar_menu_principal()
         opcion = input("Introduzca una opción:")
@@ -409,8 +413,7 @@ def mostrar_menu(pRunning):
 
 def main():
     """Función principal que arranca el programa
-    """  
-    global running 
+    """   
     running = True
     mostrar_menu(running)
 
@@ -424,8 +427,13 @@ def main():
 
 
 if __name__ == "__main__": 
-    #init_db()
-    conn = get_connection(DB_PATH)
+    
+    ruta=Path(DB_PATH)
+
+    if not ruta.exists():
+        sql_ut.init_db()    
+    
+    conn = sql_ut.get_connection(DB_PATH)
     try:
         main()
     finally:
