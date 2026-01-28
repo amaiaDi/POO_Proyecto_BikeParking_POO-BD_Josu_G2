@@ -57,7 +57,7 @@ def puede_entrar(pentrada: str, plista_entrada: list):
         return True
 
     for registro in reversed(plista_entrada):
-        if registro.serie_cuadro == pentrada:
+        if registro.numero_serie == pentrada:
             return registro.accion != "IN"
 
     return True
@@ -75,7 +75,7 @@ def puede_salir(psalida: str, plista_salida: list):
     puede_salir = False
     if plista_salida != None and len(plista_salida) >0:
             for registro in reversed(plista_salida):
-                if registro.serie_cuadro == (psalida):
+                if registro.numero_serie == (psalida):
                     if registro.accion == ("OUT"):
                         puede_salir = False
                     else: 
@@ -180,7 +180,7 @@ def es_dni_unico(dni, lista_usuarios):    #puni_dni: str, plista_usuario: list
     return True
 
 
-def es_serie_unica(puni_serie_cuadro: str, plista_bici: list):
+def es_serie_unica(pnumero_serie: str, plista_bici: list):
     """"
     Función que comprueba si solo esta ese numero de serie
 
@@ -189,11 +189,11 @@ def es_serie_unica(puni_serie_cuadro: str, plista_bici: list):
     returns: bool
     """
     for bici in plista_bici:
-        if bici.serie_cuadro == puni_serie_cuadro:
+        if bici.numero_serie == pnumero_serie:
             return False  
     return True
 
-def existe_usuario(pusuario_ok: str, conn: sqlite3.Connection):
+def existe_usuario(plista_usuarios: str, conn: sqlite3.Connection):
     """"
     Función que comprueba si existe el usuario
 
@@ -202,7 +202,7 @@ def existe_usuario(pusuario_ok: str, conn: sqlite3.Connection):
 
     returns: bool
     """
-    existe_usuario(conn,pusuario_ok )
+    existe_usuario(conn,plista_usuarios )
     return False
             
 

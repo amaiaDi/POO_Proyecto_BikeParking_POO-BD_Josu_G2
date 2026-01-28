@@ -186,8 +186,7 @@ def añadir_usuario():
     sql_ut.insert_usuario(conn, nuevo_usuario)
 
     print("OK: Usuario registrado correctamente.")
-
-
+          
 
 def añadir_bici():
     """Esta parte del codigo se encarga de añadir las bicis del usuario
